@@ -2,8 +2,14 @@
 
     const body = document.body;
 
+    /**
+    * DOM object
+    */
     const DOM = {};
 
+    /**
+    * View object
+    */
     const view = {
         notification: rating => {
             const notification = document.createElement('DIV'),
@@ -31,6 +37,9 @@
         }
     };
 
+    /**
+    * Show notification
+    */
     const showNotification = rating => {
 
         const notification = view.notification(rating);
@@ -43,6 +52,9 @@
         DOM.notification = notification;
     }
 
+    /**
+    * Close notification
+    */
     const closeNotification = ev => {
         console.log(89898);
         if (ev.key === 'Escape' && DOM.notification) {
@@ -57,22 +69,34 @@
         body.removeEventListener('keydown', closeNotification);
     };
 
+    /**
+    * Cache DOM elements
+    */
     const cacheDOM = () => {
         DOM.card = document.querySelector('.card');
         DOM.ratings = document.getElementsByClassName('rating');
     };
 
+    /**
+    * Set rating
+    */
     const setRating = ev => {
         let rating = ev.target.getAttribute('data-score');
         showNotification(rating);
     };
 
+    /**
+    * Setup events
+    */
     const setupEvents = () => {
         for (let i = 0; i < DOM.ratings.length; i++) {
             DOM.ratings[i].addEventListener('click', setRating);
         }
     };
 
+    /**
+    * Kick-off logic
+    */
     const init = () => {
         cacheDOM();
         setupEvents();
